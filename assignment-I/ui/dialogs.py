@@ -115,8 +115,8 @@ class InputRectangleDialog(QDialog):
         buttonBox.accepted.connect(self.accept)
         buttonBox.rejected.connect(self.reject)
 
-    def getInputs(self) -> tuple[int, int, int, int]:
-        return (int(self.x_field.text()), int(self.y_field.text()), int(self.width_field.text()), int(self.height_field.text())) # TASK 2
+    def getInputs(self) -> tuple[int, int, float, float]:
+        return (int(self.x_field.text()), int(self.y_field.text()), float(self.width_field.text()), float(self.height_field.text())) # TASK 2
 
 def create_rectangle(shapes: list[Shape], command_stack: CommandStack) -> None:
     dialog = InputRectangleDialog()
