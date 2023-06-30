@@ -26,9 +26,9 @@ class Triangle(Shape):
     def calc_points(self):
         # define the coordinates of the triangle's points based on center and side length
         beta = 30 * math.pi / 180
-        x1 = self._center.x - (2 / 3) * self._side * math.cos(beta)  2
+        x1 = self._center.x - (2 / 3) * self._side * math.cos(beta)  
         x2 = self._center.x
-        x3 = self._center.x + (2 / 3) * self._side * math.cos(beta)  2
+        x3 = self._center.x + (2 / 3) * self._side * math.cos(beta)  
 
         y1 = y3 = self._center.y + (1 / 3) * self._side * math.cos(beta)
         y2 = self._center.y - (2 / 3) * self._side * math.cos(beta)
