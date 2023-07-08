@@ -6,14 +6,22 @@ class CommandStack():
         self.redoStack: list[Command] = []
 
     def execute(self, command: Command) -> None:
-        # TODO: Task 5 - Implement the command stack
         command.execute()
-        # ...
+        self.undoStack.append(command)
+        self.redoStack = []
 
     def undo(self) -> None:
-        # TODO: Task 5 - Implement the command stack
-        pass
+        if len(self.undoStack) == 0:
+            return
+        lastCommand = self.undoStack[-1]
+        lastCommand.undo()
+        self.redoStack.append(lastCommand)
+        self.undoStack.pop(-1)
 
     def redo(self) -> None:
-        # TODO: Task 5 - Implement the command stack
-        pass
+        if len(self.redoStack) == 0:
+            return
+        lastUndo = self.redoStack[-1]
+        lastUndo.redo()
+        self.undoStack.append(lastUndo)
+        self.redoStack.pop(-1)
