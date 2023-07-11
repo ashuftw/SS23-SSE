@@ -209,6 +209,46 @@ def translate(shapes: list[Shape], command_stack: CommandStack) -> None:
 
 
 # TODO: Task 4 - Implement the ScaleShapeDialog class and the scale function
+class InputScalingDialog(QDialog):
+
+    def __init__(self, numberOfShapes: int, parent: Optional[QWidget] = None) -> None:
+        super().__init__(parent)
+        self.shapeNumber = QSpinBox(self)
+        self.shapeNumber.setMaximum(numberOfShapes - 1)
+        self.shapeNumber.setMinimum(0)
+        max_value = 50
+
+        self.scalingFactor = QDoubleSpinBox(self)
+        self.scalingFactor.setMaximum(max_value)
+        self.scalingFactor.setMinimum(0.1)
+
+        buttonBox = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, self)
+
+        layout = QFormLayout(self)
+        layout.addRow("shape number", self.shapeNumber)
+        layout.addRow("Scaling factor", self.scalingFactor)
+        layout.addWidget(buttonBox)
+
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+
+    def getInputs(self) -> tuple[int, float]:
+        return (self.shapeNumber.value(), self.scalingFactor.value())
+
+def scale(shapes: list[Shape], command_stack: CommandStack) -> None:
+    if(len(shapes) == 0):
+        return
+
+    dialog = InputScalingDialog(shapes.__len__())
+    if dialog.exec():
+        number = dialog.getInputs()[0]
+        scalingFactor = dialog.getInputs()[1]
+
+
+        shape = shapes[number]
+        command = ScaleShapeCommand(shape, scalingFactor)
+        command_stack.execute(command)
+
 
 class ClearShapeDialog(QDialog):
 
@@ -255,7 +295,7 @@ class ActionFactory:
             self.dialogs["Triangle"] = create_triangle
             self.dialogs["Square"] = create_square
             self.dialogs["Rectangle"] = create_rectangle
-            #self.dialogs["Scale"] = scale
+            self.dialogs["Scale"] = scale
             self.dialogs["Translate"] = translate
             self.dialogs["Clear"] = clear
             # TODO: Task 2 & 4: add the rectangle and scale dialogs to the dictionary of this factory class

@@ -17,6 +17,8 @@ class Shape(ABC):
         raise NotImplementedError
 
     # TODO: Task 4 - Implement the scale method
+    def scale(self, Factor : float) -> None :
+        pass
 
     def translate(self, dx: int, dy: int) -> None:
         self._center.translate(dx, dy)

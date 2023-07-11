@@ -11,6 +11,11 @@ class Rectangle(Shape):
         self._height = height
 
     # TODO: Task 4 - Implement the scale method
+    def scale(self, Factor ) -> None :
+        if Factor>0:
+            self._width *= Factor
+            self._height*= Factor
+
 
     def draw(self, painter: QPainter) -> None:
 

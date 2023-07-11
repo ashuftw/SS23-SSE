@@ -10,6 +10,10 @@ class Square(Shape):
         self._side = side
 
     # TODO: Task 4 - Implement the scale method
+    def scale(self, Factor ) -> None :
+        if Factor>0:
+            self._side *= Factor
+
 
     def draw(self, painter: QPainter) -> None:
 

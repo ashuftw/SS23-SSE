@@ -10,6 +10,10 @@ class Circle(Shape):
         self._radius = radius
 
     # TODO: Task 4 - Implement the scale method
+    def scale(self, Factor:float ) -> None :
+        if Factor>0:
+            self._radius *= Factor
+
 
     def draw(self, painter: QPainter) -> None:
         topLeftX = int(self._center.x - self._radius)
