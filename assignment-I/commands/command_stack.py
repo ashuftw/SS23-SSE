@@ -8,7 +8,7 @@ class CommandStack():
     def execute(self, command: Command) -> None:
         command.execute()
         self.undoStack.append(command)
-        self.redoStack = []
+        # self.redoStack = [] macht vielleicht erstmal kein sinn 
 
     def undo(self) -> None:
         if len(self.undoStack) == 0:
